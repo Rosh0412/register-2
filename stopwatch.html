@@ -1,0 +1,98 @@
+<html>
+    <head>
+    <title>
+        Stop Watch
+    </title>    
+    </head>
+
+    <style>
+#buttons {
+    position: absolute;
+    top: 55%;
+    left: 48.4%;
+    transform: translate(-51.6%, -45%);
+}
+#buttons li {
+    display: inline;
+    padding-left: 10px;
+}
+#stopwatch {
+    font-size: 100px;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -55%);
+}
+    </style>
+    <body>
+        <div  id = stopwatch>
+            00:00:00
+        </div>
+        <ul id="buttons">
+            <li> <button  onclick="start()">start</button></li>
+            <li> <button onclick="stop()">stop</button></li>
+            <li> <button onclick="reset()">reset</button></li>
+        </ul>
+    </body>
+    <script>
+      const timer = document.getElementById('stopwatch');
+
+var hr = 0;
+var min = 0;
+var sec = 0;
+var stoptime = true;
+// start function starts here....
+function start() {
+  if (stoptime == true) {
+        stoptime = false;
+        timerCycle();
+    }
+}
+// stop function starts ..............
+function stop() {
+  if (stoptime == false) {
+    stoptime = true;
+  }
+}
+
+function timerCycle() {
+    if (stoptime == false) {
+    sec = parseInt(sec);
+    min = parseInt(min);
+    hr = parseInt(hr);
+
+    sec = sec + 1;
+
+    if (sec == 60) {   // if seconds get 60, minutes gets 1 and seconds to 0
+      min = min + 1;
+      sec = 0;
+    }
+    if (min == 60) {       // if minutes get 60, hours gets 1 and minutes to 0 
+      hr = hr + 1;
+      min = 0;
+      sec=0;
+      
+    }
+    if (sec < 10 || sec == 0) {       // untill it gets double digits 0 is added..... 
+      sec = '0' + sec;
+    }
+    if (min < 10 || min == 0) {
+      min = '0' + min;
+    }
+    if (hr < 10 || hr == 0) {
+      hr = '0' + hr;
+    }
+
+
+    timer.innerHTML = hr + ':' + min + ':' + sec;
+
+    setTimeout("timerCycle()", 1000);  /// timer starts here
+  }
+}
+
+function reset() {
+    timer.innerHTML = '00:00:00';
+}
+
+    </script>
+</html>
